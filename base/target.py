@@ -14,9 +14,14 @@ except ImportError:
 
 from dsphs.base.cluster_profiles import CoredProfile
 
-from dsphs.pointlike.Sources import PointSource, ExtendedSource # good
-from dsphs.pointlike.SpatialModels import SpatialModel, Gaussian, Disk, SpatialMap
-from dsphs.pointlike.Models import PowerLaw, BrokenPowerLaw, SmoothBrokenPowerLaw
+from uw.like.pointspec_helpers import PointSource
+from uw.like.roi_extended import ExtendedSource
+from uw.like.SpatialModels import SpatialModel, Gaussian, Disk, SpatialMap
+from uw.like.Models import PowerLaw, BrokenPowerLaw, SmoothBrokenPowerLaw
+from uw.darkmatter.spectral import DMFitFunction
+from uw.darkmatter.spatial import NFW, Einasto, Burkert
+from dsphs.targets.cluster_profiles import CoredProfile
+from uw.utilities.xml_parsers import write_sources
 
 from dsphs.utils.set import *
 from dsphs.utils.tools import isRoman, isArabic, isNumeral, isnum, hms2decimal

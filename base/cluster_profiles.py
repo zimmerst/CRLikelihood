@@ -8,7 +8,7 @@ import numpy as np
 # astropy -> deals with units :)
 from astropy import units as u
 # some science tools stuff.
-from dsphs.pointlike.SpatialModels import InterpProfile
+from uw.like.SpatialModels import InterpProfile
 SMALL_ANALYTIC_EXTENSION=1e-10
 SMALL_NUMERIC_EXTENSION=1e-3
 

@@ -10,7 +10,7 @@ from tempfile import NamedTemporaryFile
 from dsphs.base.target import load_targets_from_config
 import dsphs.utils.tools as tools
 from dsphs.utils.tools import mplconfig, pwd, mkscratch, mkdir
-from dsphs.pointlike.Models import FileFunction, PowerLaw
+from uw.like.Models import FileFunction, PowerLaw
 
 mplconfig()
 import matplotlib
