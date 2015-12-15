@@ -1,0 +1,125 @@
+/** @file release.notes
+    @brief skymaps package
+    @author Toby Burnett
+
+$Id: release.notes,v 1.128 2015/12/10 06:50:10 echarles Exp $
+@verbatim
+ --------- -----   --- -----------------------------------------------------------------------
+ * EOH *
+
+ skymaps-02-16-00 09-Dec-2015 echarles Replace SkyProj with ProjBase
+ skymaps-02-15-01 08-Jul-2015 jchiang fix for STGEN-160: enabling skymaps to be built without first separately building astro
+ skymaps-02-15-00 29-Apr-2015 burnett Fixes for new IRF format
+ skymaps-02-14-02 27-Mar-2015 echarles Update include path for healpix/alm_filter_tools.h
+ skymaps-02-14-01 14-Jan-2013    jrb Do not build broken test program
+ skymaps-02-14-00 29-Nov-2012  lande new code
+ skymaps-02-13-00 10-Sep-2012  lande bugfix
+ skymaps-02-12-01 19-Jun-2012  lande Fix memory leak
+ skymaps-02-12-00 05-Apr-2012  lande fix mem leak
+ skymaps-02-11-00 08-Dec-2011    jrb memory leak fix (jrb tagging for Toby)
+ skymaps-02-10-11 15-Nov-2011  lande Change default value outside SkyImage
+ skymaps-02-10-10 28-Sep-2011 heather Patch WeightedSkyDir.h for opt Windows
+ skymaps-02-10-09 21-Jun-2011  lande Adding new object SkyImageSpectrum.
+ skymaps-02-10-08 17-Jun-2011  lande New object IsotropicConstant
+ skymaps-02-10-07 31-May-2011 heather Real Patches for CLHEP upgrade
+ skymaps-02-10-06 26-May-2011 heather Patches for CLHEP upgrade
+ skymaps-02-10-05 13-Apr-2011  lande Adding a getter function to skymaps IsotropicPowerLaw
+ skymaps-02-10-04 21-Feb-2011    jrb find numpy include via construction variable pythonSitePath
+ skymaps-02-10-03 11-Dec-2010  lande Adding non-square image creation to SkyImage
+ skymaps-02-10-02 11-Dec-2010 burnett Add CMT use for timeSystem
+ skymaps-02-10-01 10-Dec-2010 burnett Add CMT use for timeSystem
+ skymaps-02-10-00 08-Dec-2010  lande Moving WeightedSkyDir stuff to a new file. Adding a new base class for WSDL. Adding new WSDL get/set functions to SkyImage and PythonUtilties. Adding Matthew's new timing code to PythonUtilities.
+ skymaps-02-10-00 08-Dec-2010  lande Moving WeightedSkyDir stuff to a new file. Adding a new base class for WSDL. Adding new WSDL get/set functions to SkyImage and PythonUtilties. Adding Matthew's new timing code to PythonUtilities.
+ skymaps-02-09-00 08-Dec-2010  lande Moving WeightedSkyDir stuff to a new file. Adding a new base class for WSDL. Adding new WSDL get/set functions to SkyImage and PythonUtilties. Adding Matthew's new timing code to PythonUtilities.
+ skymaps-02-08-00 17-Nov-2010  lande Adding fixe for swig::stop_iteration
+ skymaps-02-08-00 17-Nov-2010  lande Adding fixe for swig::stop_iteration
+ skymaps-02-07-05 05-Oct-2010 wallace tagged by hmk, to catch patch to SConscript
+ skymaps-02-07-04 01-Sep-2010 burnett fix include path for windows/linux consistency
+ skymaps-02-07-03 01-Sep-2010 burnett fix include path for windows/linux consistency
+ skymaps-02-07-02 30-Aug-2010 burnett fix include path for windows, silence some warnings
+ skymaps-02-07-01 30-Aug-2010 burnett fix include path for windows, silence some warnings
+ skymaps-02-07-00 24-Aug-2010 burnett new Python-related support, PSF implementation
+ skymaps-02-06-02 02-Aug-2010 burnett scons/win32 fix
+ skymaps-02-06-01 31-Jul-2010 burnett corrections to fix vc90 warnigns
+ skymaps-02-06-00 07-Jun-2010 burnett just to trigger RM
+ skymaps-02-05-00 04-Jun-2010 burnett Eric's code to implement efficiency
+ skymaps-02-04-01 18-May-2010 burnett move static code into implementation file
+ skymaps-02-04-00 27-Apr-2010 burnett new PySkySpectrum
+ skymaps-02-03-01 15-Apr-2010 burnett just to see if old-style tags still work
+ skymaps-02-03-00 12-Apr-2010 burnett implement computation of distances to the list of sdirs in a Band
+ skymaps-02-02-00 24-Mar-2010 burnett added new factory interface code
+ skymaps-02-01-07 24-Mar-2010 burnett SWIG additions for HepRotation and GPS
+ skymaps-02-01-06 24-Mar-2010 burnett SWIG additions for HepRotation and GPS
+ skymaps-02-01-05 12-Mar-2010 burnett minor fix to BinnedPhontonData
+ skymaps-02-01-04 24-Feb-2010    jrb fix linking for mac
+ skymaps-02-01-03 24-Feb-2010    jrb fix linking for mac
+ skymaps-02-01-02 22-Feb-2010    jrb correct use of xxLib for libEnv
+ skymaps-02-01-01 09-Feb-2010 burnett fix SConscript
+ skymaps-02-01-00 01-Feb-2010 burnett GTI mask capability
+ skymaps-02-00-00 26-Jan-2010 burnett new Swig scheme
+ skymaps-01-24-01 27-Dec-2009 burnett SWIG additions for SkyDir
+ skymaps-01-24-00 26-Nov-2009 burnett SWIG: expose astro::JulianDate, astro::SolarSystem
+ skymaps-01-23-12 20-Nov-2009 burnett TS map tweak
+ skymaps-01-23-11 11-Nov-2009 burnett fix event type in BinnedPhotonData
+ skymaps-01-23-10 06-Oct-2009 burnett fix SWIG for ExposureWeighter; SkyImage fix addPoint
+ skymaps-01-23-09 01-Oct-2009    jrb update reference to healpix include file since it's moved from src/base to healpix/base
+ skymaps-01-23-07 25-Aug-2009 burnett extend DiffuseFunction to high energies
+ skymaps-01-23-06 07-Aug-2009    jrb Fix SConscript for Windows
+ 28-jul-09 v1r23p5 THB fix SkyImage and image.ZEA to conform to pixel indexing convention.
+ 28-jul-09 v1r23p3 THB remove some printout
+ 27-jul-09 v1r23p2 THB Fix test program on unix
+ 15-Jul-09 v1r23p1 jrb Update SConscript
+ 12-jun-09 v1r22p1 THB fix compilation error in test
+ 11-jun-09 v1r22   THB Changed ctor for SpectralFunction
+ 31-may-09 v1r21p4 THB cacheing algorithm fix
+ 30-may-09 v1r21p3 THB fix test
+ 27-may-09 v1r21p1 THB added TSmap class to image.py
+ 24-may-09 v1r21   THB enhanced EffectiveArea to use caching--speeds up!
+ 17-may-09 v1r20p2 THB gcc fix
+ 14-may-09 v1r20   MR  Fixed extrapolation error in IParams
+ 14-may-09 v1r19   THB Load PSF from CALDB file (MR); image.ZEA python class for nice pictures
+ 13-apr-09 v1r18p1 THB Minor python fix
+ 26-feb-09 v1r18   THB Move BandBackground to here; update HealpixDiffuseFunc with latest version
+ 22-feb-09 v1r17   THB WeightedSkyDir interface update, allow to specify inclusion of empty pixels
+ 16-feb-09 v1r16p3 THB better test for new phi binning
+ 24-jan-09 v1r15p2 THB extend Band a bit
+ 24-jan-09 v1r15p1 THB New class PsfSkyFunction
+ 22-jan-09 v1r14p3 THB gcc error fix
+ 21-jan-09 v1r14p1 THB new SpectralFunction class, fixes for LivetimeCube, DiffuseFunction 
+ 22-jan-09 v1r14p2 JCV Fixed 64bit bug in BinnedPhotonData.
+ 21-jan-09 v1r14p1 THB new SpectralFunction class, fixes for LivetimeCube, DiffuseFunction 
+ 12-nov-08 v1r13   THB,MR PSF inplementation using CALDB
+ 28-oct-08 v1r12   THB New HealpixDiffuseFunc class
+ 21-oct-08 v1r11   THB New CompositeSkymap class
+ 20-oct-08 v1r10p1 THB Using Band object to define energy range
+ 20-oct-08 v1r10   THB add IParams to SWIG; Background enforce list of Exposure objects
+ 17-oct-08 v1r9p3  MR  New functionality and efficiency improvements to Convolution
+ 14-oct-08 v1r9p2  THB New EffectiveArea; changed Exposure class; LivetimeCube has cone cut now, collects gti
+ 10-oct-08 v1r8p2  THB Markus mods for binning
+ 16-aug-08 v1r8    THB class to generate exposure cube; new image copy function
+ 08-aug-08 v1r7    THB Marshall's updates; better python access
+ 28-jul-08 v1r6p2  THB implement auto bounding for SIN
+ 21-jul-08 v1r6p1  THB Turn SwigModule back on
+ 19-jul-08 v1r6    THB smoothing function for BinnedPhotonData
+ 14-jul-08 v1r5p1  THB SwigModule change
+ 29-jun-08 v1r5    THB new python-friendly constructor for Background
+ 29-jun-08 v1r4    MR  more PSF
+ 24-jun-08 v1r3p2  THB swig fix for linux
+ 24-jun-08 v1r3    THB Enhance Background class
+ 20-jun-08 v1r2p1  THB Make build, especially python private
+ 20-jun-08 v1r2    THB PSF parameters now set (MR)
+ 06-jun-08 v1r1    THB Temporary specification of PSF parameters for multiple bins
+ 28-may-08 v1r0p5  MR,THB  Fixed PhotonMap and removed depricated class EnergyBinner
+ 05-may-08 v1r0p2  THB New data storage model, binning classes (still preliminary)
+ 15-apr-08 v0r7    THB Add Background class to multiply diffuse and exposure
+ 01-apr-08 v0r6p1  THB Hide some stuff that SWIG could not understand
+ 01-apr-08 v0r6    MR  Added addition operator to PhotonMap
+ 20-mar-08 v0r5    THB use SwigModule for python
+ 12-mar-08 v0r4    THB add IsotropicPowerLaw
+ 01-mar-08 v0r3    THB copy in GTI classes for convenience
+ 19-feb-08 v0r1    THB fixed default coord system: galactic for HealPixel
+ 26-jan-08         THB Initial version
+
+@endverbatim
+
+*/
