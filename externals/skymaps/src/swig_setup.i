@@ -33,31 +33,30 @@
 #include <assert.h>
 
 // EAC, include the sub-classes of ProjBase
-#include "astro/SkyDir.h"
-#include "astro/ProjBase.h"
-#include "astro/HealpixProj.h"
-#include "astro/SkyProj.h"
-#include "astro/EarthCoordinate.h"
-#include "astro/Photon.h"
-#include "astro/IGRField.h"
-#include "astro/JulianDate.h"
-#include "astro/SolarSystem.h"
-#include "astro/GPS.h"
+#include "$FERMI_DIR/include/astro/SkyDir.h"
+#include "$FERMI_DIR/include/astro/ProjBase.h"
+#include "$FERMI_DIR/include/astro/HealpixProj.h"
+#include "$FERMI_DIR/include/astro/SkyProj.h"
+#include "$FERMI_DIR/include/astro/EarthCoordinate.h"
+#include "$FERMI_DIR/include/astro/Photon.h"
+#include "$FERMI_DIR/include/astro/IGRField.h"
+#include "$FERMI_DIR/include/astro/JulianDate.h"
+#include "$FERMI_DIR/include/astro/SolarSystem.h"
+#include "$FERMI_DIR/include/astro/GPS.h"
 
 // The following four includes are needed when building skymaps
 // directly from scratch since our usage of SCons does not recursively
 // search header files for dependencies.
-#include "facilities/Observer.h"
-#include "facilities/Scheduler.h"
-#include "astro/IGRF_data.h"
-#include "astro/PointingInfo.h"
+#include "$FERMI_DIR/include/facilities/Observer.h"
+#include "$FERMI_DIR/include/facilities/Scheduler.h"
+#include "$FERMI_DIR/include/astro/IGRF_data.h"
+#include "$FERMI_DIR/include/astro/PointingInfo.h"
 
 // new!
-#include "astro/PointingTransform.h"
-
-#include "healpix/Healpix.h"
-#include "healpix/HealPixel.h"
-#include "healpix/HealpixMap.h"
+#include "$FERMI_DIR/include/astro/PointingTransform.h"
+#include "$FERMI_DIR/include/healpix/Healpix.h"
+#include "$FERMI_DIR/include/healpix/HealPixel.h"
+#include "$FERMI_DIR/include/healpix/HealpixMap.h"
 
 #include "skymaps/SkyImage.h"
 #include "skymaps/SkySpectrum.h"
@@ -93,12 +92,12 @@
 #include "skymaps/PythonUtilities.h"
 #include "skymaps/PythonPsf.h"
 
-#include "CLHEP/Vector/Rotation.h"
-#include "CLHEP/Vector/RotationX.h"
-#include "CLHEP/Vector/RotationY.h"
-#include "CLHEP/Vector/RotationZ.h"
-#include "CLHEP/Vector/EulerAngles.h"
-#include "CLHEP/Vector/ThreeVector.h"
+#include "$FERMI_DIR/include/CLHEP/Vector/Rotation.h"
+#include "$FERMI_DIR/include/CLHEP/Vector/RotationX.h"
+#include "$FERMI_DIR/include/CLHEP/Vector/RotationY.h"
+#include "$FERMI_DIR/include/CLHEP/Vector/RotationZ.h"
+#include "$FERMI_DIR/include/CLHEP/Vector/EulerAngles.h"
+#include "$FERMI_DIR/include/CLHEP/Vector/ThreeVector.h"
 
 #include "numpy/arrayobject.h"
 
