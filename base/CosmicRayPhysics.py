@@ -7,8 +7,7 @@ Created on Dec 16, 2015
 import subprocess, os, pyfits
 
 from skymaps import SkyDir
-
-from uw.like.Models import *
+from uw.like.Models import FileFunction
 from uw.like.SpatialModels import InterpProfile
 
 from dsphs.utils.par2cmd import par2cmd
@@ -23,7 +22,6 @@ class TabulatedProfile(InterpProfile):
         kwargs['kind']=kind
         kwargs['center']=center
         super(TabulatedProfile,self).__init__(**kwargs)
-
 
 class CRModel(object):
     '''

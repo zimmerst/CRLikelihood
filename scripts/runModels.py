@@ -48,7 +48,7 @@ for i,model in enumerate(models_to_test):
         raise Exception("Model is not a CRModel instance, giving up!")
     # find associated disk
     model.quickConvolution(verbose=True)
-    matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm='delta')
+    matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm='delta_average',cleanup=False)
     if matching_disk is None:
         print "Error: could not find associated radius with profile %s"%str(model)
     # load matching SED file
@@ -77,5 +77,5 @@ for i,model in enumerate(models_to_test):
         print message
         continue
     print "Writing output",config['outfile']
-    yaml_dump(r,outfile,update=True) # keep track of things!
+    yaml_dump(r,config['outfile'],update=True) # keep track of things!
 print 'Done.'
