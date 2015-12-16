@@ -76,8 +76,8 @@ class CRModel(object):
         if cleanup:
             os.remove(templateName)
             # add more cleanup files.
-        self.convolvedTemplate = parDict['outfile']
-        return os.path.abspath(self.convolvedTemplate)
+        self.convolvedTemplate = os.path.abspath(parDict['outfile'])
+        return self.convolvedTemplate
     
     def findRadius(self,scaled_srcmap,algorithm='delta_average'):
         '''
@@ -93,6 +93,7 @@ class CRModel(object):
         
         if self.convolvedTemplate is None:
             raise Exception("can't find convolved template. Have you run the convolution yet?")
+        print 'loading convolved template %s'%self.convolvedTemplate
         target = np.array(pyfits.getdata(self.convolvedTemplate,"target"),dtype=float)
         matching = None
         for i in range(0,10):
