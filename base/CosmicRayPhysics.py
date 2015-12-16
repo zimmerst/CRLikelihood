@@ -67,6 +67,9 @@ class CRModel(object):
         self.spatialModel.save_template(templateName,npix=500)
         os.environ['SRC_TEMPLATE']=os.path.abspath(templateName)
         cmd,parDict = par2cmd(parfile,returnDict=True)
+        # replace the datadir
+        while "$(DATADIR)" in cmd:
+            cmd = cmd.replace("$(DATADIR)",os.path.abspath(os.getenv("DATADIR")))
         print cmd
         pts = subprocess.Popen(cmd,shell=True)
         pts.communicate()

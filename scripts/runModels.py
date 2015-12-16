@@ -48,8 +48,8 @@ for i,model in enumerate(models_to_test):
         raise Exception("Model is not a CRModel instance, giving up!")
     print 'working on model %s'%str(model)
     # find associated disk
-    model.quickConvolution(config['parfile'],verbose=True)
-    matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm='delta_average',cleanup=False)
+    model.quickConvolution(config['parfile'],verbose=True,cleanup=False)
+    matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm='delta_average')
     if matching_disk is None:
         print "Error: could not find associated radius with profile %s"%str(model)
     print 'best matching radius : %s'%matching_disk
