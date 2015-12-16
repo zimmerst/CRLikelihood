@@ -7,7 +7,7 @@ expcube,fr,a,"$(DATADIR)/fermi/P8_SOURCE_V6_239557414_428903014_z90_r180_gti_ft1
 cmap,fr,a,"$(DATADIR)/fermi/ccube.fits",,,"Counts map file"
 srcmdl,fr,a,"$(DATADIR)/fermi/srcmdl.xml",,,"Source model file"
 bexpmap,f,a,"$(DATADIR)/fermi/bexpmap.fits",,,"Binned exposure map"
-outfile,f,a,"$(DATADIR)/fermi/srcmap.fits",,,"Source maps output file"
+outfile,f,a,"srcmap.fits",,,"Source maps output file"
 irfs,s,a,"P8R2_SOURCE_V6",,,"Response functions"
 evtype,i,h,INDEF,,,"Event type selections"
 convol,b,h,yes,,,"Perform convolution with psf"
