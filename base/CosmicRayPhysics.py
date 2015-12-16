@@ -103,7 +103,7 @@ class CRModel(object):
         for i in range(0,10):
             val = (.1+float(i)/10.)
             reference = np.array(pyfits.getdata(scaled_srcmap,val2str(val)),dtype=float)
-            fom = algorithm(target,reference)
+            fom = eval(algorithm)(target,reference)
             row = np.array([val,fom])
             if matching is None:
                 matching = row
