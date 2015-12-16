@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 import numpy as np
-from os.path import splitext
-
-import inspect, collections
-from scipy.optimize import fmin
-
-from dsphs.utils.set import SetItem, Set
-import dsphs.utils.tools as tools
-
-from dsphs.base.lnlfn import LnLFn, ProfileLimit, ProfileLnL, MarginalLnL, BayesianLimit
+from    os.path                 import splitext
+import  inspect, collections
+from    scipy.optimize          import fmin
+from    dsphs.utils.set         import  SetItem, Set
+import  dsphs.utils.tools       as      tools
+from    dsphs.base.lnlfn        import  LnLFn, ProfileLimit, ProfileLnL, MarginalLnL, BayesianLimit
 
 class SEDBin(SetItem):
     def __init__(self,name,emin,emax,**kwargs):

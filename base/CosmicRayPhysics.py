@@ -6,9 +6,15 @@ Created on Dec 16, 2015
 '''
 import subprocess, os, pyfits
 
-from skymaps import SkyDir
-from uw.like.Models import FileFunction
-from uw.like.SpatialModels import InterpProfile
+try:
+    from skymaps import SkyDir
+except ImportError:
+    print 'Could not find skymaps, trying FSSC init'
+    from pyLikelihood import SkyDir
+
+from dsphs.pointlike.Models import FileFunction
+
+from uw.like.SpatialModels import InterpProfile #FIXME: remove dependency!
 
 from dsphs.utils.par2cmd import par2cmd
 from dsphs.utils.tools import yaml_load
