@@ -1,6 +1,6 @@
 #!/bin/env python
 from optparse import OptionParser
-import sys, numpy, subprocess
+import sys, numpy, subprocess, os
 '''
  converts a ftools par file into a command that can be used to execute the relevant FTOOL
 '''
