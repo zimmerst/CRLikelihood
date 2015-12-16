@@ -27,7 +27,9 @@ config = {'jsigma': None}
 update_dict(config,yaml.load(open(args[0])),add_new_keys=True)
 
 datadir = os.getenv("DATADIR","data")
+print 'initializing CR models...'
 models_to_test = init_models(config,datadir) # this should load and init all models
+print 'found %i models'%len(models_to_test)
 
 # r holds all results.
 r = dict(
@@ -48,20 +50,24 @@ for i,model in enumerate(models_to_test):
         raise Exception("Model is not a CRModel instance, giving up!")
     print 'working on model %s'%str(model)
     # find associated disk
+    print 'convolve template with PSF'
     model.quickConvolution(config['parfile'],verbose=True,cleanup=False)
+    print 'find matching disk'
     matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm='delta_average')
     if matching_disk is None:
         print "Error: could not find associated radius with profile %s"%str(model)
     print 'best matching radius : %s'%matching_disk
     # load matching SED file
     sedfile = join(datadir,config['sed'][matching_disk])
-    print 'Loading ', sedfile
+    print 'Loading SED file:', sedfile
     sed = SED.read_yaml(sedfile)
     # global logLike
+    print 'get global logLike given the spectral form'
     pd = sed.get_global_logLike(model.spectrum, config['jsigma'])
     (norm, flux, lnl, p1lnl, flnl) = pd[0]
     p2lnl = LnLFn(pd[1][0],pd[1][3])(norm)
     lnlx = norm; lnly = lnl
+    print 'Calculating limits.'
     try:
         lnlfn = LnLFn(lnlx,lnly)
         p1lnlfn = LnLFn(lnlx,p1lnl)
