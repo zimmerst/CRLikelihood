@@ -98,5 +98,5 @@ def init_models(configfile):
     the work horse - here all models are instantiated and returned as list
     '''
     modelfile = yaml_load(configfile['models'])
-    models = [CRModel(modelfile[m]) for m in modelfile]
+    models = [CRModel(modelfile[m],name=m) for m in modelfile]
     return models

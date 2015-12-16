@@ -1,0 +1,45 @@
+CR0p01_s2p45p_B1x4p5 :
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B1x4p5.dat"
+CR0p01_s2p45p_B1x6p0 :
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B1x6p0.dat"
+CR0p01_s2p45p_B1x8p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B1x8p0.dat"
+CR0p01_s2p45p_B2x4p5:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B2x4p5.dat"
+CR0p01_s2p45p_B2x6p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B2x6p0.dat"
+CR0p01_s2p45p_B3x4p5:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B3x4p5.dat"
+CR0p01_s2p45p_B3x8p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B3x8p0.dat"
+CR0p01_s2p45p_B4x4p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B4x4p0.dat"
+CR0p01_s2p45p_B4x7p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B4x7p0.dat"
+CR0p01_s2p45p_B5x4p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B5x4p0.dat"
+CR0p01_s2p45p_B6x2p5:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B6x2p5.dat"
+CR0p01_s2p45p_B6x4p5:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_B6x4p5.dat"
+CR0p01_s2p45p_Bx3p5:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_Bx3p5.dat"
+CR0p01_s2p45p_Bx5p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_Bx5p0.dat"
+CR0p01_s2p45p_Bx7p0:
+    spectrum : "gf_data/spectrum_B6x4p5.dat"
+    profile  : "gf_data/BRIGHT_COMA_GeV_CR0p01_s2p45p_Bx7p0.dat"
