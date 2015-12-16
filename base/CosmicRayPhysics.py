@@ -77,7 +77,7 @@ class CRModel(object):
             os.remove(templateName)
             # add more cleanup files.
         self.convolvedTemplate = parDict['outfile']
-        return self.convolvedTemplate
+        return os.path.abspath(self.convolvedTemplate)
     
     def findRadius(self,scaled_srcmap,algorithm='delta_average'):
         '''
