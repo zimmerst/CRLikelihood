@@ -64,6 +64,7 @@ for i,model in enumerate(models_to_test):
     # global logLike
     print 'get global logLike given the spectral form'
     pd = sed.get_global_logLike(model.spectrum, config['jsigma'])
+    print pd
     (norm, flux, lnl, p1lnl, flnl) = pd[0]
     p2lnl = LnLFn(pd[1][0],pd[1][3])(norm)
     lnlx = norm; lnly = lnl
