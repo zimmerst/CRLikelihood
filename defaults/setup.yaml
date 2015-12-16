@@ -1,12 +1,15 @@
 # general auxiliary files from Coma paper (assumed to live in $DATADIR)
 target: "COMA"
 # changes are currently not propagated! FIXME
-parfile: "fermi/gtsrcmaps.par"
+parfile: "defaults/gtsrcmaps.par"
+
+
 #ft2file: "fermi/P8_P301_SOURCE_239557414_428903014_ft2.fits"
 #ltcube: "fermi/P8_SOURCE_V6_239557414_428903014_z90_r180_gti_ft1_gtltcube.fits"
 #bexpmap: "fermi/bexpmap.fits"
 #ccube: "fermi/ccube.fits"
 #srcmdl: "fermi/srcmdl.xml"
+
 # likelihood definitions
 sed:
     0d1 : "likelihoods/sed_0d1.yaml"
