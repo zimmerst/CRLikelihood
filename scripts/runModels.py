@@ -82,6 +82,6 @@ for i,model in enumerate(models_to_test):
     except Exception, message:
         print 'caught exception ',message
         continue
-    print "Writing output",config['outfile']
-    yaml_dump(r,config['outfile'],update=True) # keep track of things!
+print "Writing output",config['outfile']
+yaml_dump(r,config['outfile']) # keep track of things!
 print 'Done.'
