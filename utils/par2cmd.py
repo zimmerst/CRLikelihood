@@ -10,7 +10,7 @@ def par2cmd(pfile,returnDict=False):
     pars = numpy.loadtxt(pfile,delimiter=',',dtype=str,unpack=True)
     ret = {k:v for k,v in zip(pars[0],pars[3])}
     args = " ".join(["%s=%s"%(k,v) for k,v in zip(pars[0],pars[3])])
-    cmd = tool+args
+    cmd = os.path.basename(tool)+args
     if returnDict:
         return cmd, ret
     else:
