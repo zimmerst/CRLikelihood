@@ -37,7 +37,7 @@ class CRModel(object):
     Note a CR model is defined by a spectrum, a spatial model and a unique name.
     '''
 
-    def __init__(self, params):
+    def __init__(self, params,**kwargs):
         '''
         Constructor
         '''
@@ -45,8 +45,10 @@ class CRModel(object):
         self.center             = SkyDir(194.9531, 27.9807,SkyDir.EQUATORIAL)
         self.spatialModel       = TabulatedProfile(params['profile'],center=self.center)
         self.convolvedTemplate  = None
-        self.name               = params['name']
-        
+        if 'name' in params:
+            self.name               = params['name']
+        self.__dict__.update(kwargs)
+
     def __repr__(self):
         ''' 
         the string representation of the object
