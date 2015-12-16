@@ -27,7 +27,7 @@ config = {'jsigma': None}
 update_dict(config,yaml.load(open(args[0])),add_new_keys=True)
 
 datadir = os.getenv("DATADIR","data")
-models_to_test = init_models(config) # this should load and init all models
+models_to_test = init_models(config,datadir) # this should load and init all models
 
 # r holds all results.
 r = dict(

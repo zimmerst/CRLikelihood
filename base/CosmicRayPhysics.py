@@ -37,13 +37,14 @@ class CRModel(object):
     Note a CR model is defined by a spectrum, a spatial model and a unique name.
     '''
 
-    def __init__(self, params,**kwargs):
+    def __init__(self, params,datadir=None,**kwargs):
         '''
         Constructor
         '''
-        self.spectrum           = FileFunction(normalization=1, file=params['spectrum'])
+        self.datadir            = datadir
+        self.spectrum           = FileFunction(normalization=1, file=os.path.join(datadir,params['spectrum']))
         self.center             = SkyDir(194.9531, 27.9807,SkyDir.EQUATORIAL)
-        self.spatialModel       = TabulatedProfile(params['profile'],center=self.center)
+        self.spatialModel       = TabulatedProfile(os.path.join(datadir,params['profile']),center=self.center)
         self.convolvedTemplate  = None
         if 'name' in params:
             self.name               = params['name']
@@ -102,10 +103,10 @@ class CRModel(object):
         # best key
         return val2str(matching.T[0][np.argmin(matching.T[1])])
     
-def init_models(configfile):
+def init_models(configfile,datadir=None):
     '''
     the work horse - here all models are instantiated and returned as list
     '''
     modelfile = yaml_load(configfile['models'])
-    models = [CRModel(modelfile[m],name=m) for m in modelfile]
+    models = [CRModel(modelfile[m],name=m,datadir=datadir) for m in modelfile]
     return models
