@@ -5,6 +5,7 @@ Created on Dec 16, 2015
 @brief:  base class for CR model definitions. 
 '''
 import subprocess, os, pyfits
+import numpy as np
 
 try:
     from skymaps import SkyDir
