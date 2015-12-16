@@ -455,7 +455,7 @@ def yaml_dump(x, filename,update=False):
     
     if update and os.path.isfile(filename):
         print 'updating output file!'
-        o = yaml.load(filename,'rb')
+        o = yaml_load(filename)
         o.update(x)
         x = o 
     out.write( yaml.dump(x) )
