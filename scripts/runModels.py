@@ -64,15 +64,12 @@ for i,model in enumerate(models_to_test):
     # global logLike
     print 'get global logLike given the spectral form'
     pd = sed.get_global_logLike(model.spectrum, config['jsigma'])
-    print pd
-    (norm, flux, lnl, p1lnl, flnl) = pd[0]
-    p2lnl = LnLFn(pd[1][0],pd[1][3])(norm)
+    (norm, flux, lnl, p1lnl, flnl) = pd
     lnlx = norm; lnly = lnl
     print 'Calculating limits.'
     try:
         lnlfn = LnLFn(lnlx,lnly)
         p1lnlfn = LnLFn(lnlx,p1lnl)
-        p2lnlfn = LnLFn(lnlx,p2lnl)
         r['models'][i]=str(model)
         r['mle'][i] = lnlfn.mle()
         r['ulimits68'][i]  = ProfileLimit( lnlx, lnly).getLimit( 0.32 )        
