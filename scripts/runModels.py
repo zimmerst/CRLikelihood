@@ -73,14 +73,14 @@ for i,model in enumerate(models_to_test):
         r['models'][i]=str(model)
         r['mle'][i] = lnlfn.mle()
         r['ulimits68'][i]  = ProfileLimit( lnlx, lnly).getLimit( 0.32 )        
-        r['fluxes86'][i]  = ProfileLimit( flux, flnl).getLimit( 0.32 )
+        r['fluxes68'][i]  = ProfileLimit( flux, flnl).getLimit( 0.32 )
         r['ulimits95'][i]  = ProfileLimit( lnlx, lnly).getLimit( 0.05 )        
         r['fluxes95'][i]  = ProfileLimit( flux, flnl).getLimit( 0.05 )
         r['ulimits99'][i]  = ProfileLimit( lnlx, lnly).getLimit( 0.01 )
         r['fluxes99'][i]  = ProfileLimit( flux, flnl).getLimit( 0.01 )
         r['ts'][i] = float(2*(p1lnlfn(p1lnlfn.mle()) - p1lnlfn(0)))
     except Exception, message:
-        print message
+        print 'caught exception ',message
         continue
     print "Writing output",config['outfile']
     yaml_dump(r,config['outfile'],update=True) # keep track of things!
