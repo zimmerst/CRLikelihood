@@ -435,7 +435,7 @@ def yaml_load(filename):
         ret = yaml.load(open(filename),Loader=yaml.Loader)
     return ret
     
-def yaml_dump(x, filename):    
+def yaml_dump(x, filename,update=False):    
     """ Dump object to a yaml file (use libyaml when available) 
         x        : output to dump to the file
         filename : output file (can be file-type or path string)
@@ -452,6 +452,12 @@ def yaml_dump(x, filename):
         out = filename
     else:
         raise Exception("Unrecognized file: ",filename)
+    
+    if update and os.path.isfile(filename):
+        print 'updating output file!'
+        o = yaml.load(filename,'rb')
+        o.update(x)
+        x = o 
     out.write( yaml.dump(x) )
     out.close()
 

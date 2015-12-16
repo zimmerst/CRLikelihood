@@ -1,0 +1,29 @@
+# general auxiliary files from Coma paper (assumed to live in $DATADIR)
+target: "COMA"
+# changes are currently not propagated! FIXME
+parfile: "fermi/gtsrcmaps.par"
+#ft2file: "fermi/P8_P301_SOURCE_239557414_428903014_ft2.fits"
+#ltcube: "fermi/P8_SOURCE_V6_239557414_428903014_z90_r180_gti_ft1_gtltcube.fits"
+#bexpmap: "fermi/bexpmap.fits"
+#ccube: "fermi/ccube.fits"
+#srcmdl: "fermi/srcmdl.xml"
+# likelihood definitions
+sed:
+    0d1 : "likelihoods/sed_0d1.yaml"
+    0d2 : "likelihoods/sed_0d2.yaml"
+    0d3 : "likelihoods/sed_0d3.yaml"
+    0d4 : "likelihoods/sed_0d4.yaml"
+    0d5 : "likelihoods/sed_0d5.yaml"
+    0d6 : "likelihoods/sed_0d6.yaml"
+    0d7 : "likelihoods/sed_0d7.yaml"
+    0d8 : "likelihoods/sed_0d8.yaml"
+    0d9 : "likelihoods/sed_0d9.yaml"
+    1d0 : "likelihoods/sed_1d0.yaml"
+# associated disk
+scaled_disk_srcmap : "likelihoods/srcmap_scaled_disk.fits"
+
+# next is model definition
+models: "defaults/models.yaml"
+
+# output definition
+outfile: "allModels_out.yaml"
