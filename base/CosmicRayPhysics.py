@@ -14,6 +14,9 @@ from dsphs.utils.par2cmd import par2cmd
 from dsphs.utils.tools import yaml_load
 
 class TabulatedProfile(InterpProfile):
+    ''' 
+    to be compatible with Fabio's files
+    '''
     def __init__(self,datfile,center=None,kind='cubic'):
         r_in_degrees, pdf = np.loadtxt(datfile,unpack=True)
         kwargs = {}
@@ -22,7 +25,7 @@ class TabulatedProfile(InterpProfile):
         kwargs['kind']=kind
         kwargs['center']=center
         super(TabulatedProfile,self).__init__(**kwargs)
-
+    
 class CRModel(object):
     '''
     Note a CR model is defined by a spectrum, a spatial model and a unique name.
