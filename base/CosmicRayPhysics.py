@@ -35,11 +35,9 @@ class TabulatedProfile(InterpProfile):
                 self.pdf = pdf
                 self.radii = radii
                 self.interp = interp1d(np.log10(self.radii),np.log10(self.pdf),kind='linear',bounds_error=False,fill_value=-55)
-            def __call__(self):
-                return self.interp
         logPDF = LogInterpolate(r_in_degrees,pdf)
         radii = np.linspace(np.log10(r_in_degrees[0]),np.log10(r_in_degrees[-1]),10000)
-        pdf = logPDF(radii)
+        pdf = logPDF.interp(radii)
         integral = quad(logPDF.interp,radii[0],radii[-1])
         pdf/= integral[0] # now we've normalized it.
         kwargs = {}
