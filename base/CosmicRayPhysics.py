@@ -6,6 +6,9 @@ Created on Dec 16, 2015
 '''
 import subprocess, os, pyfits
 import numpy as np
+from scipy.interpolate import interp1d
+from scipy.integrate import quad
+from scipy.stats.morestats import pdf_fromgamma
 
 try:
     from skymaps import SkyDir
@@ -26,8 +29,21 @@ class TabulatedProfile(InterpProfile):
     '''
     def __init__(self,datfile,center=None,kind='cubic'):
         r_in_degrees, pdf = np.loadtxt(datfile,unpack=True)
+        # let's interpolate linearly and get a dense sampling
+        class LogInterpolate(object):
+            def __init__(self,radii,pdf,**kwargs):
+                self.pdf = pdf
+                self.radii = radii
+                self.interp = interp1d(np.log10(self.radii),np.log10(self.pdf),kind='linear',bounds_error=False,fill_value=-55)
+            def __call__(self):
+                return self.interp
+        logPDF = LogInterpolate(r_in_degrees,pdf)
+        radii = np.linspace(np.log10(r_in_degrees[0]),np.log10(r_in_degrees[-1]),10000)
+        pdf = logPDF(radii)
+        integral = quad(logPDF.interp,radii[0],radii[-1])
+        pdf/= integral[0] # now we've normalized it.
         kwargs = {}
-        kwargs['r_in_degrees']=r_in_degrees
+        kwargs['r_in_degrees']=np.power(10,radii)
         kwargs['pdf']=pdf
         kwargs['kind']=kind
         kwargs['center']=center
