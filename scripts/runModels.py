@@ -82,9 +82,11 @@ for i,model in enumerate(models_to_test):
     except Exception, message:
         print 'caught exception ',message
         continue
-files = glob.glob("*_spatial.fits")+['srcmap.fits','gtsrcmaps.par']
+    [os.remove(f) for f in ["gtsrcmaps.par","srcmap.fits"]]
+    
 print "Writing output",config['outfile']
 yaml_dump(r,config['outfile']) # keep track of things!
 print 'cleaning up...'
+files = glob.glob("*_spatial.fits")
 [os.remove(f) for f in files]
 print 'Done.'
