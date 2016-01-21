@@ -7,7 +7,7 @@ Created on Dec 15, 2015
 
 #!/usr/bin/env python
 from optparse import OptionParser
-import yaml, copy, os 
+import yaml, copy, os, glob
 from os.path import join
 import numpy as np
 
