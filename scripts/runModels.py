@@ -23,7 +23,7 @@ parser.add_option("--text_output",action='store_true',default=False)
 parser.add_option("--seddir",default=None)
 (opts, args) = parser.parse_args()
 
-config = {'jsigma': None}
+config = {'jsigma': None,'comparison_operator':'delta_average'}
 update_dict(config,yaml.load(open(args[0])),add_new_keys=True)
 
 datadir = os.getenv("DATADIR","data")
@@ -53,7 +53,7 @@ for i,model in enumerate(models_to_test):
     print 'convolve template with PSF'
     model.quickConvolution(config['parfile'],verbose=True,cleanup=False)
     print 'find matching disk'
-    matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm='delta_average')
+    matching_disk = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm=config['comparison_operator'])
     if matching_disk is None:
         print "Error: could not find associated radius with profile %s"%str(model)
     print 'best matching radius : %s'%matching_disk

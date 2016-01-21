@@ -90,6 +90,7 @@ class CRModel(object):
         '''
         depending on the algorithm, return the disk radius that matches best
         '''
+        print 'INFO: Algorithm: %s'%algorithm
         def val2str(val): return ("%1.1f"%val).replace(".","d")
             
         def delta_average(a,b,ebounds=None):
