@@ -102,8 +102,8 @@ class CRModel(object):
             e_min, e_max = ebounds['E_MIN'],ebounds['E_MAX']
             energies = np.power(10,np.log10(e_min)+(np.log10(e_max)-np.log10(e_min))/2.)
             e0 = e_min[0]
-            Z_a = np.sum([scaled_slice(slice,e,e0) for e in energies])
-            Z_b = np.sum([scaled_slice(slice,e,e0) for e in energies])
+            Z_a = np.sum(np.array([scaled_slice(slice,e,e0) for e in e_min]))
+            Z_b = np.sum(np.array([scaled_slice(slice,e,e0) for e in e_min]))
             return np.abs(Z_a - Z_b)
         # implement other algorithms as we need.
         
