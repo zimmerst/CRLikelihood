@@ -92,21 +92,31 @@ class CRModel(object):
         '''
         def val2str(val): return ("%1.1f"%val).replace(".","d")
             
-        def delta_average(a,b):
+        def delta_average(a,b,ebounds=None):
             avg_a = np.average(a,axis=0)
             avg_b = np.average(b,axis=0)
             return np.abs(avg_a - avg_b)
+        def delta_weighted_energy(a,b,ebounds,index=-2.0):
+            def scaled_slice(slice,e,e0):
+                return slice*np.power(e/e0,index)
+            e_min, e_max = ebounds['E_MIN'],ebounds['E_MAX']
+            energies = np.power(10,np.log10(e_min)+(np.log10(e_max)-np.log10(e_min))/2.)
+            e0 = e_min[0]
+            Z_a = np.sum([scaled_slice(slice,e,e0) for e in energies])
+            Z_b = np.sum([scaled_slice(slice,e,e0) for e in energies])
+            return np.abs(Z_a - Z_b)
         # implement other algorithms as we need.
         
         if self.convolvedTemplate is None:
             raise Exception("can't find convolved template. Have you run the convolution yet?")
         print 'loading convolved template %s'%self.convolvedTemplate
         target = np.array(pyfits.getdata(self.convolvedTemplate,"target"),dtype=float)
+        ebounds = pyfits.getdata(self.convolvedTemplate,"ebounds")
         matching = None
         for i in range(0,10):
             val = (.1+float(i)/10.)
             reference = np.array(pyfits.getdata(scaled_srcmap,val2str(val)),dtype=float)
-            fom = np.sum(eval(algorithm)(target,reference)) # to convert a map to one single value
+            fom = np.sum(eval(algorithm)(target,reference,ebounds=ebounds)) # to convert a map to one single value
             print '*DEBUG* val, fom: ',val, fom
             row = np.array([val,fom])
             if matching is None:
