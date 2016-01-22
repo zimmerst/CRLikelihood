@@ -79,6 +79,7 @@ for i,model in enumerate(models_to_test):
         r['ulimits99'][i]  = ProfileLimit( lnlx, lnly).getLimit( 0.01 )
         r['fluxes99'][i]  = ProfileLimit( flux, flnl).getLimit( 0.01 )
         r['ts'][i] = float(2*(p1lnlfn(p1lnlfn.mle()) - p1lnlfn(0)))
+        r['matching_radius']=matching_disk
     except Exception, message:
         print 'caught exception ',message
         continue
