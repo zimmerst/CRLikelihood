@@ -14,7 +14,7 @@ import numpy as np
 from dsphs.base.CosmicRayPhysics    import CRModel, init_models
 from dsphs.base.sed                 import SED
 from dsphs.base.lnlfn               import ProfileLnL, ProfileLimit, LnLFn
-from dsphs.utils.tools              import yaml_dump, update_dict
+from dsphs.utils.tools              import yaml_dump, update_dict, safe_copy
 
 usage = "Usage: %prog  [options] config.yaml"
 description = "run all model comparisons"
@@ -83,6 +83,7 @@ for i,model in enumerate(models_to_test):
     except Exception, message:
         print 'caught exception ',message
         continue
+    safe_copy("srcmap.fits","%s_srcmap.fits"%model)
     [os.remove(f) for f in ["gtsrcmaps.par","srcmap.fits"]]
     
 print "Writing output",config['outfile']
