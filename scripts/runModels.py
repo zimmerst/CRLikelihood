@@ -34,6 +34,7 @@ print 'found %i models'%len(models_to_test)
 # r holds all results.
 r = dict(
         models = copy.copy([str(m) for m in models_to_test]), # note: we are only interested in the names, list contains full obj. reference
+        matching_radius = copy.copy([str(None) for m in models_to_test]), # note: we are only interested in the names, list contains full obj. reference
         ulimits68 = np.nan*np.ones( len(models_to_test) ),  # upper limits w/o nuisance J-factor
         fluxes68 = np.nan*np.ones( len(models_to_test) ),   # flux upper limits w/o nuisance J-factor    
         ulimits95 = np.nan*np.ones( len(models_to_test) ),  # upper limits w/o nuisance J-factor
@@ -41,7 +42,7 @@ r = dict(
         ulimits99 = np.nan*np.ones( len(models_to_test) ),  # 99% upper limits w/o nuisance J-factor
         fluxes99 = np.nan*np.ones( len(models_to_test) ),   # 99% flux upper limits w/o nuisance J-factor
         mle = np.nan*np.ones( len(models_to_test) ),      # MLE w/o nuisance J-factor
-        ts = np.nan*np.ones( len(models_to_test) ),       # TS value, only for curiosity!
+        ts = np.nan*np.ones( len(models_to_test) )       # TS value, only for curiosity!
         )
 data = {}
 
@@ -79,7 +80,7 @@ for i,model in enumerate(models_to_test):
         r['ulimits99'][i]  = ProfileLimit( lnlx, lnly).getLimit( 0.01 )
         r['fluxes99'][i]  = ProfileLimit( flux, flnl).getLimit( 0.01 )
         r['ts'][i] = float(2*(p1lnlfn(p1lnlfn.mle()) - p1lnlfn(0)))
-        r['matching_radius']=matching_disk
+        r['matching_radius'][i]=matching_disk
     except Exception, message:
         print 'caught exception ',message
         continue
