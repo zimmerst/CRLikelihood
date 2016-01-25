@@ -127,6 +127,8 @@ class CRModel(object):
         target_profile = array2DtoProfile(target2D, pixelsize=np.abs(tHeader['CDELT1']), interpolate=True)
         target_profile_interp = target_profile[1]
         matching = None
+        disk_radii = np.arange(0.1,1.1,0.1)
+        foms = np.nan*np.ones( len(disk_radii) )
         for i in range(0,10):
             val = (.1+float(i)/10.)
             reference, rHeader = pyfits.getdata(scaled_srcmap,val2str(val),header=True)
@@ -136,6 +138,7 @@ class CRModel(object):
             x = target_profile[0]
             fractional_difference = np.abs(ref_profile_interp(x) - target_profile_interp(x))/ref_profile_interp(x)
             fom = np.sum(fractional_difference)
+            foms[i] = fom
             print '*DEBUG* val, rel difference (sum): ',val, fom
             row = np.array([val,fom])
             if matching is None:
@@ -144,7 +147,7 @@ class CRModel(object):
                 matching = np.vstack((matching,row))
         # best key
         # minimize the fractional difference 
-        return val2str(matching.T[0][np.argmin(matching.T[1])])
+        return val2str(matching.T[0][np.argmin(matching.T[1])]),(disk_radii,foms)
     
 def init_models(configfile,datadir=None):
     '''
