@@ -23,7 +23,7 @@ parser.add_option("--text_output",action='store_true',default=False)
 parser.add_option("--seddir",default=None)
 (opts, args) = parser.parse_args()
 
-config = {'jsigma': None,'comparison_operator':'delta_average'}
+config = {'jsigma': None,'comparison_operator':'average'}
 update_dict(config,yaml.load(open(args[0])),add_new_keys=True)
 
 datadir = os.getenv("DATADIR","data")

@@ -10,6 +10,9 @@ from scipy.interpolate import interp1d
 from scipy.integrate import quad
 from scipy.stats.morestats import pdf_fromgamma
 
+from scipy.interpolate import interp1d
+import numpy as np
+
 try:
     from skymaps import SkyDir
 except ImportError:
@@ -22,6 +25,15 @@ from uw.like.SpatialModels import InterpProfile #FIXME: remove dependency!
 
 from dsphs.utils.par2cmd import par2cmd
 from dsphs.utils.tools import yaml_load
+
+def array2DtoProfile(array2D,pixelsize=1.,interpolate=False):
+    # get dimensions
+    n, m = np.shape(array2D)
+    x = np.arange(0,n/2.)
+    y = array2D[m/2,n/2:]
+    x*= np.abs(pixelsize)
+    yint = interp1d(x,y)
+    return (x,y if not interpolate else yint)
 
 class TabulatedProfile(InterpProfile):
     ''' 
@@ -91,40 +103,46 @@ class CRModel(object):
         depending on the algorithm, return the disk radius that matches best
         '''
         print 'INFO: Algorithm: %s'%algorithm
-        def val2str(val): return ("%1.1f"%val).replace(".","d")
+        def val2str(v): return ("%1.1f"%v).replace(".","d")
+        def str2val(s): return float(s.replace("d","."))
+        
+        def average(a,ebounds=None): 
+            return np.average(a,axis=0)
             
-        def delta_average(a,b,ebounds=None):
-            avg_a = np.average(a,axis=0)
-            avg_b = np.average(b,axis=0)
-            return np.abs(avg_a - avg_b)
-        def delta_weighted_energy(a,b,ebounds,index=-2.0):
+        def weighted_energy(a,ebounds,index=-2.0):
             def scaled_slice(slice,e,e0):
                 return slice*np.power(e/e0,index)
             e_min, e_max = ebounds['E_MIN'],ebounds['E_MAX']
             energies = np.power(10,np.log10(e_min)+(np.log10(e_max)-np.log10(e_min))/2.)
             e0 = e_min[0]
             Z_a = np.sum(np.array([scaled_slice(a[i],e,e0) for i,e in enumerate(e_min)]))
-            Z_b = np.sum(np.array([scaled_slice(b[i],e,e0) for i,e in enumerate(e_min)]))
-            return np.abs(Z_a - Z_b)
+            return Z_a
         # implement other algorithms as we need.
         
         if self.convolvedTemplate is None:
             raise Exception("can't find convolved template. Have you run the convolution yet?")
         print 'loading convolved template %s'%self.convolvedTemplate
-        target = np.array(pyfits.getdata(self.convolvedTemplate,"target"),dtype=float)
+        target, tHeader = pyfits.getdata(self.convolvedTemplate,"target",header=True)
         ebounds = pyfits.getdata(self.convolvedTemplate,"ebounds")
+        target2D = eval(algorithm)(np.array(target,dtype=float),ebounds=ebounds)
+        target_profile = array2DtoProfile(target2D, pixelsize=np.abs(tHeader['CDELT1']), interpolate=True)
         matching = None
         for i in range(0,10):
             val = (.1+float(i)/10.)
-            reference = np.array(pyfits.getdata(scaled_srcmap,val2str(val)),dtype=float)
-            fom = np.sum(eval(algorithm)(target,reference,ebounds=ebounds)) # to convert a map to one single value
-            print '*DEBUG* val, fom: ',val, fom
+            reference, rHeader = pyfits.getdata(scaled_srcmap,val2str(val),header=True)
+            ref2D = eval(np.array(algorithm,dtype=float))(reference,ebounds=ebounds)
+            ref_profile = array2DtoProfile(ref2D, pixelsize=np.abs(rHeader['CDELT1']), interpolate=True)
+            x = target_profile[0]
+            fractional_difference = np.abs(target_profile(x) - ref_profile(x))/ref_profile(x)
+            fom = np.sum(fractional_difference)
+            print '*DEBUG* val, rel difference (sum): ',val, fom
             row = np.array([val,fom])
             if matching is None:
                 matching = row
             else:
                 matching = np.vstack((matching,row))
         # best key
+        # minimize the fractional difference 
         return val2str(matching.T[0][np.argmin(matching.T[1])])
     
 def init_models(configfile,datadir=None):
