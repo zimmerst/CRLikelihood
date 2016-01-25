@@ -130,7 +130,7 @@ class CRModel(object):
         for i in range(0,10):
             val = (.1+float(i)/10.)
             reference, rHeader = pyfits.getdata(scaled_srcmap,val2str(val),header=True)
-            ref2D = eval(np.array(algorithm,dtype=float))(reference,ebounds=ebounds)
+            ref2D = eval(algorithm)(np.array(reference,dtype=float),ebounds=ebounds)
             ref_profile = array2DtoProfile(ref2D, pixelsize=np.abs(rHeader['CDELT1']), interpolate=True)
             x = target_profile[0]
             fractional_difference = np.abs(target_profile(x) - ref_profile(x))/ref_profile(x)
