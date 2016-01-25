@@ -32,8 +32,7 @@ def array2DtoProfile(array2D,pixelsize=1.,interpolate=False):
     x = np.arange(0,n/2.)
     y = array2D[m/2,n/2:]
     x*= np.abs(pixelsize)
-    yint = interp1d(x,y)
-    return (x,y if not interpolate else yint)
+    return (x,y if not interpolate else interp1d(x,y))
 
 class TabulatedProfile(InterpProfile):
     ''' 
@@ -126,14 +125,16 @@ class CRModel(object):
         ebounds = pyfits.getdata(self.convolvedTemplate,"ebounds")
         target2D = eval(algorithm)(np.array(target,dtype=float),ebounds=ebounds)
         target_profile = array2DtoProfile(target2D, pixelsize=np.abs(tHeader['CDELT1']), interpolate=True)
+        target_profile_interp = target_profile[1]
         matching = None
         for i in range(0,10):
             val = (.1+float(i)/10.)
             reference, rHeader = pyfits.getdata(scaled_srcmap,val2str(val),header=True)
             ref2D = eval(algorithm)(np.array(reference,dtype=float),ebounds=ebounds)
             ref_profile = array2DtoProfile(ref2D, pixelsize=np.abs(rHeader['CDELT1']), interpolate=True)
+            ref_profile_interp = ref_profile[1]
             x = target_profile[0]
-            fractional_difference = np.abs(target_profile[1](x) - ref_profile(x)[1])/ref_profile[1](x)
+            fractional_difference = np.abs(ref_profile_interp(x) - target_profile_interp(x))/ref_profile_interp(x)
             fom = np.sum(fractional_difference)
             print '*DEBUG* val, rel difference (sum): ',val, fom
             row = np.array([val,fom])
