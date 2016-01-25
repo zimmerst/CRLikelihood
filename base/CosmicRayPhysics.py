@@ -133,7 +133,7 @@ class CRModel(object):
             ref2D = eval(algorithm)(np.array(reference,dtype=float),ebounds=ebounds)
             ref_profile = array2DtoProfile(ref2D, pixelsize=np.abs(rHeader['CDELT1']), interpolate=True)
             x = target_profile[0]
-            fractional_difference = np.abs(target_profile(x) - ref_profile(x))/ref_profile(x)
+            fractional_difference = np.abs(target_profile[1](x) - ref_profile(x)[1])/ref_profile(x)
             fom = np.sum(fractional_difference)
             print '*DEBUG* val, rel difference (sum): ',val, fom
             row = np.array([val,fom])
