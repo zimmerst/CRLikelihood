@@ -117,7 +117,15 @@ class CRModel(object):
             Z_a = np.sum(np.array([scaled_slice(a[i],e,e0) for i,e in enumerate(e_min)]),axis=0)
             return Z_a
         # implement other algorithms as we need.
-        
+        def weighted_energy_spectra(a,ebounds):
+            def scaled_slice(a,e,e0):
+                return a*self.spectrum.i_flux(e0,e,e_weight=0,cgs=False)#add integral here.
+            e_min, e_max = ebounds['E_MIN'],ebounds['E_MAX']
+            energies = np.power(10,np.log10(e_min)+(np.log10(e_max)-np.log10(e_min))/2.)
+            e0 = e_min[0]
+            Z_a = np.sum(np.array([scaled_slice(a[i],e,e0) for i,e in enumerate(e_min)]),axis=0)
+            return Z_a
+          
         if self.convolvedTemplate is None:
             raise Exception("can't find convolved template. Have you run the convolution yet?")
         print 'loading convolved template %s'%self.convolvedTemplate
