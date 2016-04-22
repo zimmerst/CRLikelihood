@@ -122,7 +122,7 @@ class CRModel(object):
                 return a*self.spectrum(e)#add integral here.
             e_min, e_max = ebounds['E_MIN'],ebounds['E_MAX']
             energies = np.power(10,np.log10(e_min)+(np.log10(e_max)-np.log10(e_min))/2.)
-            e0 = e_min[0]
+            e0 = e_min[0]   
             Z_a = np.sum(np.array([scaled_slice(a[i],e) for i,e in enumerate(e_min)]),axis=0)
             return Z_a
         def weighted_energy_spectra_integral(a,ebounds):
@@ -150,8 +150,8 @@ class CRModel(object):
             reference, rHeader = pyfits.getdata(scaled_srcmap,val2str(val),header=True)
             ref2D = eval(algorithm)(np.array(reference,dtype=float),ebounds=ebounds)
             ref_profile = array2DtoProfile(ref2D, pixelsize=np.abs(rHeader['CDELT1']), interpolate=True)
-            ref_profile_interp = ref_profile[1]
             x = target_profile[0]
+            ref_profile_interp = ref_profile[1]
             fractional_difference = np.abs(ref_profile_interp(x) - target_profile_interp(x))/ref_profile_interp(x)
             fom = np.sum(fractional_difference)
             foms[i] = fom
