@@ -61,7 +61,7 @@ for i,model in enumerate(models_to_test):
         print "Error: could not find associated radius with profile %s"%str(model)
         continue
     ### 
-    md = float(matching_disk.replace("d",","))        
+    md = float(matching_disk.replace("d","."))        
     if opts.bracket != "None":
         if md == 0 or md == 1.0: 
             print 'WARNING: matching disk already at boundary, will not go out of it.'
