@@ -21,7 +21,7 @@ description = "run all model comparisons"
 parser = OptionParser(usage=usage,description=description)
 parser.add_option("--text_output",action='store_true',default=False)
 parser.add_option("--seddir",default=None)
-parser.add_option("--bracket",default="None",type=str,choices=["None",'plus','minus'],help='choose plus or minus to run in bracket mode')
+parser.add_option("--bracket",default="None",choices=["None",'plus','minus'],help='choose plus or minus to run in bracket mode')
 (opts, args) = parser.parse_args()
 
 config = {'jsigma': None,'comparison_operator':'average'}
