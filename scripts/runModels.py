@@ -21,6 +21,7 @@ description = "run all model comparisons"
 parser = OptionParser(usage=usage,description=description)
 parser.add_option("--text_output",action='store_true',default=False)
 parser.add_option("--seddir",default=None)
+parser.add_option("--bracket",default="None",type=str,choices=["None",'plus','minus'],help='choose plus or minus to run in bracket mode')
 (opts, args) = parser.parse_args()
 
 config = {'jsigma': None,'comparison_operator':'average'}
@@ -58,6 +59,17 @@ for i,model in enumerate(models_to_test):
     matching_disk,foms = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm=config['comparison_operator'])
     if matching_disk is None:
         print "Error: could not find associated radius with profile %s"%str(model)
+        continue
+    ### 
+    md = float(matching_disk.replace("d",","))        
+    if opts.bracket != "None":
+        if md == 0 or md == 1.0: 
+            print 'WARNING: matching disk already at boundary, will not go out of it.'
+        else:
+            if opts.bracket == "plus": md += 0.1
+            else: md -= 0.1
+            print 'Info: added padding to matching radius according to bracket'
+    matching_disk = ("%1.1f"%md).replace(".","d")
     print 'best matching radius : %s'%matching_disk
     # load matching SED file
     sedfile = join(datadir,config['sed'][matching_disk])
@@ -88,7 +100,10 @@ for i,model in enumerate(models_to_test):
         continue
     safe_copy("srcmap.fits","%s_srcmap.fits"%model)
     [os.remove(f) for f in ["gtsrcmaps.par","srcmap.fits"]]
-    
+
+if opts.bracket != "None":
+    if opts.bracket == "plus": config['outfile']=config['outfile'].replace(".yaml","_plus.yaml")
+    else:   config['outfile']=config['outfile'].replace(".yaml","_minus.yaml")
 print "Writing output",config['outfile']
 yaml_dump(r,config['outfile']) # keep track of things!
 print 'cleaning up...'
