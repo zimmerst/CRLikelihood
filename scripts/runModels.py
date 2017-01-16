@@ -104,8 +104,9 @@ for i,model in enumerate(models_to_test):
     except Exception, message:
         print 'caught exception ',message
         continue
-    safe_copy("srcmap.fits","%s_srcmap.fits"%model)
-    [os.remove(f) for f in ["gtsrcmaps.par","srcmap.fits"]]
+    if not opts.pointlike is None:
+        safe_copy("srcmap.fits","%s_srcmap.fits"%model)
+        [os.remove(f) for f in ["gtsrcmaps.par","srcmap.fits"]]
 
 if opts.bracket != "None":
     if opts.bracket == "plus": config['outfile']=config['outfile'].replace(".yaml","_plus.yaml")
