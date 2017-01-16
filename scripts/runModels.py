@@ -100,7 +100,7 @@ for i,model in enumerate(models_to_test):
         r['fluxes99'][i]  = ProfileLimit( flux, flnl).getLimit( 0.01 )
         r['ts'][i] = float(2*(p1lnlfn(p1lnlfn.mle()) - p1lnlfn(0)))
         r['matching_radius'][i]=matching_disk if opts.pointlike is None else 0. 
-        r['fom']=foms 
+        r['fom']=foms if opts.pointlike is None else 0. 
     except Exception, message:
         print 'caught exception ',message
         continue
