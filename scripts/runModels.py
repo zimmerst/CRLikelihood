@@ -20,6 +20,7 @@ usage = "Usage: %prog  [options] config.yaml"
 description = "run all model comparisons"
 parser = OptionParser(usage=usage,description=description)
 parser.add_option("--text_output",action='store_true',default=False)
+parser.add_option("--pointlike",default=None, help='name of point-like SED file')
 parser.add_option("--seddir",default=None)
 parser.add_option("--bracket",default="None",choices=["None",'plus','minus'],help='choose plus or minus to run in bracket mode')
 (opts, args) = parser.parse_args()
@@ -49,30 +50,35 @@ r = dict(
 data = {}
 
 for i,model in enumerate(models_to_test):
-    if not isinstance(model,CRModel): 
-        raise Exception("Model is not a CRModel instance, giving up!")
-    print 'working on model %s'%str(model)
-    # find associated disk
-    print 'convolve template with PSF'
-    model.quickConvolution(config['parfile'],verbose=True,cleanup=False)
-    print 'find matching disk'
-    matching_disk,foms = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm=config['comparison_operator'])
-    if matching_disk is None:
-        print "Error: could not find associated radius with profile %s"%str(model)
-        continue
-    ### 
-    md = float(matching_disk.replace("d","."))        
-    if opts.bracket != "None":
-        if md == 0 or md == 1.0: 
-            print 'WARNING: matching disk already at boundary, will not go out of it.'
-        else:
-            if opts.bracket == "plus": md += 0.1
-            else: md -= 0.1
-            print 'Info: added padding to matching radius according to bracket'
-    matching_disk = ("%1.1f"%md).replace(".","d")
-    print 'best matching radius : %s'%matching_disk
-    # load matching SED file
-    sedfile = join(datadir,config['sed'][matching_disk])
+    sedfile = None
+    if not opts.pointlike is None:
+        sedfile = opts.pointlike
+        print 'found point-source version of likelihood.'
+    else:
+        if not isinstance(model,CRModel): 
+            raise Exception("Model is not a CRModel instance, giving up!")
+        print 'working on model %s'%str(model)
+        # find associated disk
+        print 'convolve template with PSF'
+        model.quickConvolution(config['parfile'],verbose=True,cleanup=False)
+        print 'find matching disk'
+        matching_disk,foms = model.findRadius(join(datadir,config['scaled_disk_srcmap']),algorithm=config['comparison_operator'])
+        if matching_disk is None:
+            print "Error: could not find associated radius with profile %s"%str(model)
+            continue
+        ### 
+        md = float(matching_disk.replace("d","."))        
+        if opts.bracket != "None":
+            if md == 0 or md == 1.0: 
+                print 'WARNING: matching disk already at boundary, will not go out of it.'
+            else:
+                if opts.bracket == "plus": md += 0.1
+                else: md -= 0.1
+                print 'Info: added padding to matching radius according to bracket'
+        matching_disk = ("%1.1f"%md).replace(".","d")
+        print 'best matching radius : %s'%matching_disk
+        # load matching SED file
+        sedfile = join(datadir,config['sed'][matching_disk])
     print 'Loading SED file:', sedfile
     sed = SED.read_yaml(sedfile)
     # global logLike
